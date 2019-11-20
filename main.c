@@ -52,74 +52,41 @@ int main(int argc, char *argv[])
 	 printf(" player%d bets %d dollars\n", i, 1+rand()%asset[i]);
 	
 	//cardset
-	
-	int heartA=11; //value for calculating
-	int heart2=2;
-	int heart3=3;
-	int heart4=4;
-	int heart5=5;
-	int heart6=6;
-	int heart7=7;
-	int heart8=8;
-	int heart9=9;
-	int heart10=10;
-	int heartJ=10;
-	int heartQ=10;
-	int heartK=10;
-	
-	int diaA=11;
-	int dia2=2;
-	int dia3=3;
-	int dia4=4;
-	int dia5=5;
-	int dia6=6;
-	int dia7=7;
-	int dia8=8;
-	int dia9=9;
-	int dia10=10;
-	int diaJ=10;
-	int diaQ=10;
-	int diaK=10;
-	
-	int spadeA=11;
-	int spade2=2;
-	int spade3=3;
-	int spade4=4;
-	int spade5=5;
-	int spade6=6;
-	int spade7=7;
-	int spade8=8;
-	int spade9=9;
-	int spade10=10;
-	int spadeJ=10;
-	int spadeQ=10;
-	int spadeK=10;
-	
-	int clovA=11;
-	int clov2=2;
-	int clov3=3;
-	int clov4=4;
-	int clov5=5;
-	int clov6=6;
-	int clov7=7;
-	int clov8=8;
-	int clov9=9;
-	int clov10=10;
-	int clovJ=10;
-	int clovQ=10;
-	int clovK=10;
-	
-	//cardset
-	char card[4][13][7]={
+	char card[4][13][5]={
 		{"hrtA", "hrt2", "hrt3", "hrt4", "hrt5", "hrt6", "hrt7", "hrt8", "hrt9", "hrt10", "hrtJ", "hrtQ", "hrtK"},
 		{"diaA", "dia2", "dia3", "dia4", "dia5", "dia6", "dia7", "dia8", "dia9", "dia10", "diaJ", "diaQ", "diaK"},
 		{"spdA", "spd2", "spd3", "spd4", "spd5", "spd6", "spd7", "spd8", "spd9", "spd10", "spdJ", "spdQ", "spdK"},
 		{"clvA", "clv2", "clv3", "clv4", "clv5", "clv6", "clv7", "clv8", "clv9", "clv10", "clvJ", "clvQ", "clvK"}
 	};
 	
+	//pulling the cards without repitition
 	srand((unsigned)time(NULL));
-	int j=rand()%4;
-	int k=rand()%13;
+	int n;
+	int n_pull=1;
+	int j,k;
+	int pulled_card1[52];
+	int pulled_card2[52];
+	
+    while(n<n_pull)
+	{
+	    j=rand()%4;
+	    k=rand()%13;
+	    
+	    pulled_card1[n_pull]=j;
+	    pulled_card2[n_pull]=k;
+
+		if((pulled_card1[n]==j)&&(pulled_card2[n]==k))
+		{
+			n++;
+		}
+	    else
+		{
+			break;
+		}
+	    
+		return j, k;		
+    }
+	n_pull++;
 	
 	int m;
 	
@@ -127,5 +94,17 @@ int main(int argc, char *argv[])
 	{
 		printf("%c", card[j][k][m]);
 	}
+	
+	//calculating card sum
+	
+	int n_card[4][13]={
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+	};
+	
+	printf(" (sum=%d)", n_card[j][k]);
+	
 	return 0;
 }
