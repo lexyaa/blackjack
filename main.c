@@ -4,6 +4,65 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
+int pull_card(int n_pull)
+{
+	int n, j, k, m;
+	int *j_2, *k_2;
+	j_2=&j;
+	k_2=&k;
+	
+	int pulled_card1[52];
+	int pulled_card2[52];
+	
+	char card[4][13][5]={
+		{"hrtA", "hrt2", "hrt3", "hrt4", "hrt5", "hrt6", "hrt7", "hrt8", "hrt9", "hrt10", "hrtJ", "hrtQ", "hrtK"},
+		{"diaA", "dia2", "dia3", "dia4", "dia5", "dia6", "dia7", "dia8", "dia9", "dia10", "diaJ", "diaQ", "diaK"},
+		{"spdA", "spd2", "spd3", "spd4", "spd5", "spd6", "spd7", "spd8", "spd9", "spd10", "spdJ", "spdQ", "spdK"},
+		{"clvA", "clv2", "clv3", "clv4", "clv5", "clv6", "clv7", "clv8", "clv9", "clv10", "clvJ", "clvQ", "clvK"}
+	};
+	
+	int n_card[4][13]={
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+	};
+	
+	//pulling a card without repition
+	while(n<n_pull)
+	{
+	    j=rand()%4;
+	    k=rand()%13;
+	    
+	    pulled_card1[n_pull]=j;
+	    pulled_card2[n_pull]=k;
+	    
+	    /*if(n_pull==52)
+	    {
+	    	game_end();
+		}
+		else*/
+		if((pulled_card1[n]==j)&&(pulled_card2[n]==k))
+		{
+			n++;
+		}
+	    else
+		{
+			break;
+		}
+    }
+    
+    //printing the card
+	for(m=0;m<4;m++)
+	{
+		printf("%c", card[j][k][m]);
+	}
+	
+	//sum of pulled cards
+	printf(" (sum=%d)", n_card[j][k]);
+	
+	return 0;
+}
 int main(int argc, char *argv[])
 {
 	//getNumber; get the number of player
@@ -50,61 +109,19 @@ int main(int argc, char *argv[])
 	srand((unsigned)time(NULL));
 	for(i=1;i<n_player;i++)
 	 printf(" player%d bets %d dollars\n", i, 1+rand()%asset[i]);
-	
-	//cardset
-	char card[4][13][5]={
-		{"hrtA", "hrt2", "hrt3", "hrt4", "hrt5", "hrt6", "hrt7", "hrt8", "hrt9", "hrt10", "hrtJ", "hrtQ", "hrtK"},
-		{"diaA", "dia2", "dia3", "dia4", "dia5", "dia6", "dia7", "dia8", "dia9", "dia10", "diaJ", "diaQ", "diaK"},
-		{"spdA", "spd2", "spd3", "spd4", "spd5", "spd6", "spd7", "spd8", "spd9", "spd10", "spdJ", "spdQ", "spdK"},
-		{"clvA", "clv2", "clv3", "clv4", "clv5", "clv6", "clv7", "clv8", "clv9", "clv10", "clvJ", "clvQ", "clvK"}
-	};
-	
+		
 	//pulling the cards without repitition
 	srand((unsigned)time(NULL));
-	int n;
 	int n_pull=1;
-	int j,k;
-	int pulled_card1[52];
-	int pulled_card2[52];
 	
-    while(n<n_pull)
-	{
-	    j=rand()%4;
-	    k=rand()%13;
-	    
-	    pulled_card1[n_pull]=j;
-	    pulled_card2[n_pull]=k;
-
-		if((pulled_card1[n]==j)&&(pulled_card2[n]==k))
-		{
-			n++;
-		}
-	    else
-		{
-			break;
-		}
-	    
-		return j, k;		
-    }
+    pull_card(n_pull);
 	n_pull++;
 	
-	int m;
+	pull_card(n_pull);
+	n_pull++;
 	
-	for(m=0;m<4;m++)
-	{
-		printf("%c", card[j][k][m]);
-	}
-	
-	//calculating card sum
-	
-	int n_card[4][13]={
-		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
-		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
-		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
-		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
-	};
-	
-	printf(" (sum=%d)", n_card[j][k]);
+	pull_card(n_pull);
+	n_pull++;
 	
 	return 0;
 }
