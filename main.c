@@ -4,12 +4,12 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-int pull_card(int n_pull)
+int n_pull=1;
+int j, k;
+
+int pull_card()
 {
-	int n, j, k, m;
-	int *j_2, *k_2;
-	j_2=&j;
-	k_2=&k;
+	int n, m;
 	
 	int pulled_card1[52];
 	int pulled_card2[52];
@@ -21,28 +21,21 @@ int pull_card(int n_pull)
 		{"clvA", "clv2", "clv3", "clv4", "clv5", "clv6", "clv7", "clv8", "clv9", "clv10", "clvJ", "clvQ", "clvK"}
 	};
 	
-	int n_card[4][13]={
-		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
-		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
-		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
-		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
-	};
-	
 	//pulling a card without repition
 	while(n<n_pull)
 	{
+		srand((unsigned)time(NULL));
 	    j=rand()%4;
 	    k=rand()%13;
 	    
 	    pulled_card1[n_pull]=j;
 	    pulled_card2[n_pull]=k;
 	    
-	    /*if(n_pull==52)
+	    if(n_pull==52)
 	    {
 	    	game_end();
 		}
-		else*/
-		if((pulled_card1[n]==j)&&(pulled_card2[n]==k))
+		else if((pulled_card1[n]==j)&&(pulled_card2[n]==k))
 		{
 			n++;
 		}
@@ -51,18 +44,37 @@ int pull_card(int n_pull)
 			break;
 		}
     }
-    
+
     //printing the card
 	for(m=0;m<4;m++)
 	{
 		printf("%c", card[j][k][m]);
 	}
 	
-	//sum of pulled cards
+	return 0;
+}
+//sum of pulled card
+int sum_card()
+{
+	
+	int n_card[4][13]={
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+		{11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10},
+	};
+	
 	printf(" (sum=%d)", n_card[j][k]);
 	
 	return 0;
 }
+
+int game_end()
+{
+	printf("Game over!\n the winner is ");
+	return 0;
+}
+
 int main(int argc, char *argv[])
 {
 	//getNumber; get the number of player
@@ -108,20 +120,22 @@ int main(int argc, char *argv[])
 	int i; // betting the money of computer players
 	srand((unsigned)time(NULL));
 	for(i=1;i<n_player;i++)
-	 printf(" player%d bets %d dollars\n", i, 1+rand()%asset[i]);
+	 printf(" player%d bet %d dollars\n", i, 1+rand()%asset[i]);
 		
-	//pulling the cards without repitition
-	srand((unsigned)time(NULL));
-	int n_pull=1;
-	
-    pull_card(n_pull);
-	n_pull++;
-	
-	pull_card(n_pull);
-	n_pull++;
-	
-	pull_card(n_pull);
-	n_pull++;
-	
+	//pulling the cards without repitition(check)
+	n_pull+=1;
+	printf("%d", n_pull);
+    pull_card();
+    sum_card();
+    n_pull+=1;
+	printf("%d", n_pull);
+    pull_card();
+    sum_card();
+    n_pull+=1;
+    printf("%d", n_pull);
+    pull_card();
+    sum_card();
+    n_pull+=1;
+    
 	return 0;
 }
